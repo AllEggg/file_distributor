@@ -6,7 +6,6 @@ import ru.oleaghue.file_distributor.util.ConfigReader;
 import ru.oleaghue.file_distributor.util.FileDistributor;
 import ru.oleaghue.file_distributor.util.OutLogWriter;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.Objects;
