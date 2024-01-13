@@ -8,17 +8,17 @@ import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 
 public class FileDistributor {
+    private final String fileSeparator = File.separator;
+    private final Calendar calendar = Calendar.getInstance();
 
-    public void distribute(String baseDir) {
+    public void distribute(String baseDir, String newDir) {
         try {
             Map<String, List<File>> fileMap = getFileMap(baseDir);
-            copyFiles(baseDir, fileMap);
+            copyFiles(newDir, fileMap);
         } catch (Exception e) {
             throw new CopyFileException(e);
         }
@@ -28,28 +28,26 @@ public class FileDistributor {
         File folder = new File(baseDir);
         File[] listOfFiles = folder.listFiles();
         Map<String, List<File>> fileMap = new HashMap<>();
-        Calendar calendar = Calendar.getInstance();
-        for (File file : listOfFiles) {
-            if (file.isFile()) {
-                long lastModified = file.lastModified();
-                Date date = new Date(lastModified);
-                calendar.setTime(date);
-                int day = calendar.get(Calendar.DAY_OF_YEAR);
-                int hour = calendar.get(Calendar.HOUR);
-                String key = String.valueOf(day) + String.valueOf(hour);
-                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-                fileMap.computeIfAbsent(key, l -> new ArrayList<>());
-                List<File> fileList = fileMap.get(key);
-                fileList.add(file);
-                String formattedDate = dateFormat.format(date);
-                System.out.println(file.getName() + " last modified " + formattedDate);
+
+        if (listOfFiles != null) {
+            for (File file : listOfFiles) {
+                if (file.isFile()) {
+                    long lastModified = file.lastModified();
+                    Date date = new Date(lastModified);
+
+                    String key = dateKeyGenerator(date);
+
+                    fileMap.computeIfAbsent(key, l -> new ArrayList<>());
+                    List<File> fileList = fileMap.get(key);
+                    fileList.add(file);
+                }
             }
         }
         return fileMap;
     }
-    private void copyFiles(String baseDir, Map<String, List<File>> fileMap) throws IOException {
+    private void copyFiles(String newDir, Map<String, List<File>> fileMap) throws IOException {
         for (String key : fileMap.keySet()) {
-            String newPackName = baseDir + File.separator + key;
+            String newPackName = newDir + fileSeparator + key;
             File newFilePack = new File(newPackName);
             if (!newFilePack.isDirectory()) {
                 boolean created = newFilePack.mkdirs();
@@ -59,7 +57,7 @@ public class FileDistributor {
             }
             for (File file : fileMap.get(key)) {
                 Path source = file.toPath();
-                Path destination = Paths.get(newPackName + File.separator + file.getName());
+                Path destination = Paths.get(newPackName + fileSeparator + file.getName());
                 try {
                     Files.copy(source, destination);
                     Files.delete(source);
@@ -70,5 +68,17 @@ public class FileDistributor {
                 }
             }
         }
+    }
+
+    private String dateKeyGenerator(Date date) {
+        calendar.setTime(date);
+        String separator = "_";
+        return (calendar.get(Calendar.YEAR)) +
+                separator +
+                calendar.get(Calendar.MONTH) +
+                separator +
+                calendar.get(Calendar.DAY_OF_MONTH) +
+                separator +
+                calendar.get(Calendar.HOUR);
     }
 }

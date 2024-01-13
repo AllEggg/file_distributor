@@ -22,12 +22,15 @@ public class FileDistributorApplication {
 		OutLogWriter.startLogWriter(appDir);
 		Map<String, String> settingsMap = ConfigReader.readConfig(appDir);
 		String baseDir = settingsMap.get("BaseDirectory");
+		String newDir = settingsMap.get("DirectoryToDistribute");
 
 		FileDistributor distributor = new FileDistributor();
 		boolean needStop = false;
 		while (!needStop) {
-			distributor.distribute(baseDir);
-			Thread.sleep(TimeUnit.MINUTES.toMillis(1L));
+			LocalDateTime dateOfIteration = LocalDateTime.now();
+			System.out.println(dateOfIteration + " Запущен процесс копирования");
+			distributor.distribute(baseDir, newDir);
+			Thread.sleep(TimeUnit.HOURS.toMillis(1L));
 			settingsMap = ConfigReader.readConfig(appDir);
 			needStop = Objects.equals("YES", settingsMap.get("NeedToStop"));
 		}
