@@ -29,6 +29,7 @@ public class FileDistributorApplication {
 			LocalDateTime dateOfIteration = LocalDateTime.now();
 			System.out.println(dateOfIteration + " Запущен процесс копирования");
 			distributor.distribute(baseDir, newDir);
+			System.out.println(dateOfIteration + " Копирование завершено");
 			Thread.sleep(TimeUnit.HOURS.toMillis(1L));
 			settingsMap = ConfigReader.readConfig(appDir);
 			needStop = Objects.equals("YES", settingsMap.get("NeedToStop"));
