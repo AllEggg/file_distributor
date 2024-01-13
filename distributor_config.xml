@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<Settings>
+    <Setting>
+        <name>BaseDirectory</name>
+        <value>C:\Users\PC\test_dir</value>
+    </Setting>
+    <Setting>
+        <name>DirectoryToDistribute</name>
+        <value>C:\Users\PC\test_dir\newDir</value>
+    </Setting>
+    <Setting>
+        <name>NeedToStop</name>
+        <value>NO</value>
+    </Setting>
+</Settings>
