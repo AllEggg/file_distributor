@@ -47,7 +47,12 @@ public class FileDistributor {
     }
     private void copyFiles(String newDir, Map<String, List<File>> fileMap) throws IOException {
         for (String key : fileMap.keySet()) {
-            String newPackName = newDir + fileSeparator + key;
+            DateFormatter dateFormatter = new DateFormatter(key);
+            String newPackName = newDir +
+                    dateFormatter.getYear() + fileSeparator +
+                    dateFormatter.getMonth() + fileSeparator +
+                    dateFormatter.getDay() + fileSeparator +
+                    dateFormatter.getHours();
             File newFilePack = new File(newPackName);
             if (!newFilePack.isDirectory()) {
                 boolean created = newFilePack.mkdirs();
@@ -79,6 +84,10 @@ public class FileDistributor {
                 separator +
                 calendar.get(Calendar.DAY_OF_MONTH) +
                 separator +
+                calendar.get(Calendar.AM_PM) +
+                separator +
                 calendar.get(Calendar.HOUR);
     }
+
+
 }

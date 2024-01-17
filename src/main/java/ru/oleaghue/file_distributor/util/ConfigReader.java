@@ -19,7 +19,7 @@ import java.util.Map;
 
 public class ConfigReader {
 
-    public static Map<String, String> readConfig(String dir)  {
+    public static Map<String, String> readConfig(String dir, String studioName)  {
         Map<String, String> result = new HashMap<>();
         String filePath = dir + File.separator + "distributor_config.xml";
         File file = new File(filePath);
@@ -33,7 +33,7 @@ public class ConfigReader {
             Document document = builder.parse(file);
             document.getDocumentElement().normalize();
 
-            NodeList nodeList = document.getElementsByTagName("Setting");
+            NodeList nodeList = document.getElementsByTagName(studioName);
 
             for (int i = 0; i < nodeList.getLength(); i++) {
                 Setting setting = getSetting(nodeList.item(i));
