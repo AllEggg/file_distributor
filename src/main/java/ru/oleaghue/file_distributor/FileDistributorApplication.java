@@ -115,6 +115,9 @@ public class FileDistributorApplication {
 			executorService.submit(t2);
 			executorService.submit(t3);
 
+			t1.join();
+			t2.join();
+			t3.join();
 		} catch (Exception e) {
 			System.out.println(e.getMessage() + "\n" + e.getCause());
 			throw e;
