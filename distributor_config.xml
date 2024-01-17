@@ -1,15 +1,40 @@
 <?xml version="1.0"?>
 <Settings>
-    <Setting>
+    <Studio1>
         <name>BaseDirectory</name>
         <value>C:\Users\PC\test_dir</value>
-    </Setting>
-    <Setting>
+    </Studio1>
+    <Studio1>
         <name>DirectoryToDistribute</name>
         <value>C:\Users\PC\test_dir\newDir</value>
-    </Setting>
-    <Setting>
+    </Studio1>
+    <Studio1>
         <name>NeedToStop</name>
         <value>NO</value>
-    </Setting>
+    </Studio1>
+    <Studio2>
+        <name>BaseDirectory</name>
+        <value>C:\Users\PC\test_dir\logging</value>
+    </Studio2>
+    <Studio2>
+        <name>DirectoryToDistribute</name>
+        <value>C:\Users\PC\test_dir\logging\newDir</value>
+    </Studio2>
+    <Studio2>
+        <name>NeedToStop</name>
+        <value>NO</value>
+    </Studio2>
+    <Studio3>
+        <name>BaseDirectory</name>
+        <value>C:\Users\PC\test_dir\moreDir</value>
+    </Studio3>
+    <Studio3>
+        <name>DirectoryToDistribute</name>
+        <value>C:\Users\PC\test_dir\moreDir\newDir</value>
+    </Studio3>
+    <Studio3>
+        <name>NeedToStop</name>
+        <value>NO</value>
+    </Studio3>
 </Settings>
+
