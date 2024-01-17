@@ -12,6 +12,11 @@
         <name>NeedToStop</name>
         <value>NO</value>
     </Studio1>
+    <Studio1>
+        <name>SleepTime</name>
+        <value>2</value>
+    </Studio1>
+    <!-- ****************************************** -->
     <Studio2>
         <name>BaseDirectory</name>
         <value>C:\Users\PC\test_dir\logging</value>
@@ -24,6 +29,11 @@
         <name>NeedToStop</name>
         <value>NO</value>
     </Studio2>
+    <Studio2>
+        <name>SleepTime</name>
+        <value>2</value>
+    </Studio2>
+    <!-- ****************************************** -->
     <Studio3>
         <name>BaseDirectory</name>
         <value>C:\Users\PC\test_dir\moreDir</value>
@@ -36,5 +46,8 @@
         <name>NeedToStop</name>
         <value>NO</value>
     </Studio3>
+    <Studio3>
+        <name>SleepTime</name>
+        <value>2</value>
+    </Studio3>
 </Settings>
-
